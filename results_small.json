@@ -1,0 +1,44 @@
+{
+  "6": {
+    "kappa": "23",
+    "hex": "0x17",
+    "verified": true,
+    "time_s": 0.0,
+    "method": "BSGS"
+  },
+  "8": {
+    "kappa": "24",
+    "hex": "0x18",
+    "verified": true,
+    "time_s": 0.0,
+    "method": "BSGS"
+  },
+  "12": {
+    "kappa": "2026",
+    "hex": "0x7ea",
+    "verified": true,
+    "time_s": 0.0,
+    "method": "BSGS"
+  },
+  "16": {
+    "kappa": "8964",
+    "hex": "0x2304",
+    "verified": true,
+    "time_s": 0.001,
+    "method": "BSGS"
+  },
+  "24": {
+    "kappa": "6847083",
+    "hex": "0x687a6b",
+    "verified": true,
+    "time_s": 0.012,
+    "method": "BSGS"
+  },
+  "32": {
+    "kappa": "3332946015",
+    "hex": "0xc6a8b85f",
+    "verified": true,
+    "time_s": 0.593,
+    "method": "BSGS"
+  }
+}

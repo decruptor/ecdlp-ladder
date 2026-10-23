@@ -1,0 +1,10 @@
+# build artifacts
+*.o
+rho1
+rho2
+rho_ref*
+rho48
+rho80
+rho96
+.DS_Store
+*~

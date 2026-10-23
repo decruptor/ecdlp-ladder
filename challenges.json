@@ -1,0 +1,227 @@
+{
+  "source": "arXiv:2508.14011v2 Appendix A",
+  "task": "find kappa such that P = [kappa]Q on y^2=x^3+7 mod p; no interval restriction (full-range DLP, kappa in [1,n-1])",
+  "rungs": [
+    {
+      "bits": 6,
+      "curve": "secp6k1",
+      "p": "43",
+      "n": "31",
+      "P_compressed": "0307",
+      "Q_compressed": "0320",
+      "note": "",
+      "embedding_degree": 30,
+      "anomalous": false
+    },
+    {
+      "bits": 8,
+      "curve": "secp8k1",
+      "p": "163",
+      "n": "139",
+      "P_compressed": "0205",
+      "Q_compressed": "0261",
+      "note": "",
+      "embedding_degree": 69,
+      "anomalous": false
+    },
+    {
+      "bits": 12,
+      "curve": "secp12k1",
+      "p": "2089",
+      "n": "2143",
+      "P_compressed": "0207C0",
+      "Q_compressed": "03053E",
+      "note": "",
+      "embedding_degree": 357,
+      "anomalous": false
+    },
+    {
+      "bits": 16,
+      "curve": "secp16k1",
+      "p": "32803",
+      "n": "32497",
+      "P_compressed": "0260A3",
+      "Q_compressed": "036D88",
+      "note": "",
+      "embedding_degree": 32496,
+      "anomalous": false
+    },
+    {
+      "bits": 24,
+      "curve": "secp24k1",
+      "p": "16777213",
+      "n": "16770451",
+      "P_compressed": "0276BA79",
+      "Q_compressed": "0385303B",
+      "note": "",
+      "embedding_degree": 1118030,
+      "anomalous": false
+    },
+    {
+      "bits": 32,
+      "curve": "secp32k1",
+      "p": "4294966177",
+      "n": "4294835173",
+      "P_compressed": "021E0EF3EB",
+      "Q_compressed": "02EF01BFF4",
+      "note": "",
+      "embedding_degree": 1431611724,
+      "anomalous": false
+    },
+    {
+      "bits": 48,
+      "curve": "secp48k1",
+      "p": "281474976707983",
+      "n": "281474961723409",
+      "P_compressed": "03769EC7F35857",
+      "Q_compressed": "02210644F01A41",
+      "note": "",
+      "embedding_degree": 70368740430852,
+      "anomalous": false
+    },
+    {
+      "bits": 64,
+      "curve": "secp64k1",
+      "p": "18446744073709546873",
+      "n": "18446744079408176167",
+      "P_compressed": "037F3EBCB70E7FF266",
+      "Q_compressed": "03989C2061EF0E994E",
+      "note": "",
+      "embedding_degree": 9223372039704088083,
+      "anomalous": false
+    },
+    {
+      "bits": 80,
+      "curve": "secp80k1",
+      "p": "1208925819614629174697917",
+      "n": "1208925819612459780337609",
+      "P_compressed": "030D08430A6C00FAE05651",
+      "Q_compressed": "02CF45D656507F3699875E",
+      "note": "",
+      "embedding_degree": 1208925819612459780337608,
+      "anomalous": false
+    },
+    {
+      "bits": 96,
+      "curve": "secp96k1",
+      "p": "79228162514264337593543943091",
+      "n": "79228162514264890447722092359",
+      "P_compressed": "029E1F276C17BCE3D8DF9D22BB",
+      "Q_compressed": "03CCF37E1E144A24433C0582A6",
+      "note": "",
+      "embedding_degree": 39614081257132445223861046179,
+      "anomalous": false
+    },
+    {
+      "bits": 112,
+      "curve": "secp112k1",
+      "p": "5192296858534827628530496329219907",
+      "n": "5192296858534827704501506384124197",
+      "P_compressed": "02949E2914E4863781500B38122BFD",
+      "Q_compressed": "03EAE0A2B0C8B159B55FA7C5BF18D0",
+      "note": "",
+      "embedding_degree": 1730765619511609234833835461374732,
+      "anomalous": false
+    },
+    {
+      "bits": 128,
+      "curve": "secp128k1",
+      "p": "340282366920938463463374607431768193873",
+      "n": "340282366920938463493968231006123201901",
+      "P_compressed": "02429EC9073D11651ACFA5293FC7641CE5",
+      "Q_compressed": "03871B2CDD66580C22D129B3DBA13AADE4",
+      "note": "",
+      "embedding_degree": 22685491128062564232931215400408213460,
+      "anomalous": false
+    },
+    {
+      "bits": 144,
+      "curve": "secp144k1",
+      "p": "22300745198530623141535718272648361505978547",
+      "n": "22300745198530623141528449602726112266830289",
+      "P_compressed": "03635AC435AB7D9405A142D55723D4588B2392",
+      "Q_compressed": "03B33F4F69A88768A79D3F029C3928D61FF18D",
+      "note": "ERRATUM in paper v2: card prints n equal to p; true group order (SEA) is 22300745198530623141528449602726112266830289 (prime); P and Q both have that order. Not anomalous, no Smart shortcut.",
+      "embedding_degree": 22300745198530623141528449602726112266830288,
+      "anomalous": false,
+      "paper_n_as_printed": null
+    },
+    {
+      "bits": 160,
+      "curve": "secp160k1",
+      "p": "1461501637330902918203684832716283019655932523797",
+      "n": "1461501637330902918203683111413834986743050038629",
+      "P_compressed": "022E9A635AC20A338BCF78452EE06D87F74BAB9888",
+      "Q_compressed": "02A15CB33F4E47113EB4981A4E92BD658CD5307B1D",
+      "note": "",
+      "embedding_degree": 243583606221817153033947185235639164457175006438,
+      "anomalous": false
+    },
+    {
+      "bits": 176,
+      "curve": "secp176k1",
+      "p": "95780971304118053647396689196894323976171195136464057",
+      "n": "95780971304118053647396688993621402904752667866498983",
+      "P_compressed": "0370A72E9A635AC20A1D46F3921D13BB3673C1B54BA654",
+      "Q_compressed": "037BB4A15CB33F4E4705985367CE2E3EB95382ABA25799",
+      "note": "",
+      "embedding_degree": 47890485652059026823698344496810701452376333933249491,
+      "anomalous": false
+    },
+    {
+      "bits": 192,
+      "curve": "secp192k1",
+      "p": "6277101735386680763835789423207666416102355444464034510271",
+      "n": "6277101735386680763835789423049239630206963053826514709771",
+      "P_compressed": "02362870A72E9A635AC20A1D46E6B4EBB7526089BC79F0B9D2",
+      "Q_compressed": "0355117BB4A15CB33F4E4705984CACFC6137DAE282E7F936CA",
+      "note": "",
+      "embedding_degree": 2092367245128893587945263141016413210068987684608838236590,
+      "anomalous": false
+    },
+    {
+      "bits": 208,
+      "curve": "secp208k1",
+      "p": "411376139330301510538742295639337626245683966408394965837126831",
+      "n": "411376139330301510538742295639309734542636196754601463706467431",
+      "P_compressed": "023A98362870A72E9A635AC20A1D46E6B4E8AB299942EB67C20297",
+      "Q_compressed": "024DA955117BB4A15CB33F4E4705984CACFAC914CBD728FBAF980D",
+      "note": "",
+      "embedding_degree": 411376139330301510538742295639309734542636196754601463706467430,
+      "anomalous": false
+    },
+    {
+      "bits": 224,
+      "curve": "secp224k1",
+      "p": "26959946667150639794667015087019630673637144422540572481103610247941",
+      "n": "26959946667150639794667015087019637901048645921160586259561071496361",
+      "P_compressed": "02549C3A98362870A72E9A635AC20A1D46E6B4E8AB0C13C010E18EEB2D",
+      "Q_compressed": "03F7BB4DA955117BB4A15CB33F4E4705984CACFAC9055A294AF4CC490A",
+      "note": "",
+      "embedding_degree": 2246662222262553316222251257251636491754053826763382188296755958030,
+      "anomalous": false
+    },
+    {
+      "bits": 240,
+      "curve": "secp240k1",
+      "p": "1766847064778384329583297500742918515827483896875618958121606201292517917",
+      "n": "1766847064778384329583297500742918517618513573386834281239873043187462749",
+      "P_compressed": "036903549C3A98362870A72E9A635AC20A1D46E6B4E8AB0C13BE965A409A82",
+      "Q_compressed": "021792F7BB4DA955117BB4A15CB33F4E4705984CACFAC9055A2884EE41346F",
+      "note": "",
+      "embedding_degree": 294474510796397388263882916790486419603085595564472380206645507197910458,
+      "anomalous": false
+    },
+    {
+      "bits": 256,
+      "curve": "secp256k1",
+      "p": "115792089237316195423570985008687907853269984665640564039457584007908834671663",
+      "n": "115792089237316195423570985008687907852837564279074904382605163141518161494337",
+      "P_compressed": "034C186903549C3A98362870A72E9A635AC20A1D46E6B4E8AB0C13BE95E3FBE93A",
+      "Q_compressed": "0327CF1792F7BB4DA955117BB4A15CB33F4E4705984CACFAC9055A2884B061E4E3",
+      "note": "",
+      "embedding_degree": 19298681539552699237261830834781317975472927379845817397100860523586360249056,
+      "anomalous": false
+    }
+  ]
+}

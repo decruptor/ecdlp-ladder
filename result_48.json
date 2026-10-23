@@ -1,0 +1,8 @@
+{
+  "bits": 48,
+  "kappa": "22175762888240",
+  "hex": "0x142b32783630",
+  "verified": true,
+  "time_s": 1.0,
+  "method": "parallel Pollard rho (DP, OpenMP C, Montgomery)"
+}

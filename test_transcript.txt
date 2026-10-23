@@ -1,0 +1,118 @@
+===================================================================
+rho80.cu — local validation transcript (no GPU; CPU_REF + fuzz)
+generated: 2026-10-23 15:59:25
+===================================================================
+
+-------------------------------------------------------------------
+1. Field-arithmetic fuzz vs Python long ints (fuzz_fe.py):
+   mont_mul / fe_add / fe_sub / fe_inv, 32-bit limbs
+-------------------------------------------------------------------
+$ python3 fuzz_fe.py 48 100000 2>&1 | tail -2
+fuzz rung 48: 312500 vectors checked (M=100000 A=100000 S=100000 I=12500), mismatches=0
+FUZZ PASS
+
+$ python3 fuzz_fe.py 64 100000 2>&1 | tail -2
+fuzz rung 64: 312500 vectors checked (M=100000 A=100000 S=100000 I=12500), mismatches=0
+FUZZ PASS
+
+$ python3 fuzz_fe.py 80 100000 2>&1 | tail -2
+fuzz rung 80: 312500 vectors checked (M=100000 A=100000 S=100000 I=12500), mismatches=0
+FUZZ PASS
+
+-------------------------------------------------------------------
+2. Built-in __int128 fuzz (inside 'fuzz', NW64==1 rungs only):
+-------------------------------------------------------------------
+$ ./rho_ref48 fuzz 2000 2>&1 | tail -1
+INTERNAL fuzz (3e6 mont_mul + 3e6 add/sub): mismatches=0
+
+$ ./rho_ref32 fuzz 2000 2>&1 | tail -1
+INTERNAL fuzz (3e6 mont_mul + 3e6 add/sub): mismatches=0
+
+-------------------------------------------------------------------
+3. CUDA-only code paths: syntax/type check via cuda_stubs.h
+   (no nvcc on this machine; checks kernel/shuffle/atomic/launch
+    code paths that the CPU_REF build does not compile)
+-------------------------------------------------------------------
+$ clang++ -x c++ -O1 -include cuda_stubs.h -DCPU_STUB -D__CUDACC__ -D__CUDA_ARCH__=890 -DRUNG=32 -o /tmp/stub32 rho80.cu && echo 'STUB CHECK RUNG 32: OK'
+STUB CHECK RUNG 32: OK
+
+$ clang++ -x c++ -O1 -include cuda_stubs.h -DCPU_STUB -D__CUDACC__ -D__CUDA_ARCH__=890 -DRUNG=48 -o /tmp/stub48 rho80.cu && echo 'STUB CHECK RUNG 48: OK'
+STUB CHECK RUNG 48: OK
+
+$ clang++ -x c++ -O1 -include cuda_stubs.h -DCPU_STUB -D__CUDACC__ -D__CUDA_ARCH__=890 -DRUNG=64 -o /tmp/stub64 rho80.cu && echo 'STUB CHECK RUNG 64: OK'
+STUB CHECK RUNG 64: OK
+
+$ clang++ -x c++ -O1 -include cuda_stubs.h -DCPU_STUB -D__CUDACC__ -D__CUDA_ARCH__=890 -DRUNG=80 -o /tmp/stub80 rho80.cu && echo 'STUB CHECK RUNG 80: OK'
+STUB CHECK RUNG 80: OK
+
+-------------------------------------------------------------------
+4. Jump-table cross-check vs rho.c (mode-98 dump, seed 98)
+-------------------------------------------------------------------
+$ ./rho1 fffffffff58f ffffff1b5011 769ec7f35857 b4a02702bdb 210644f01a41 553d08cef988 12 32 64 10 21 98 > /tmp/tj_rho.txt
+
+$ ./rho_ref48 jumptest 98 > /tmp/tj_ref.txt
+
+RUNG 48 JUMP TABLE: IDENTICAL (33 lines)
+
+$ ./rho2 ffffffffffffffffdfbd fffffffffe06e604efc9 d08430a6c00fae05651 51f122611becfa454627 cf45d656507f3699875e 3bffc8e5352fdbabb520 12 32 64 10 21 98 > /tmp/tj_rho.txt
+
+$ ./rho_ref80 jumptest 98 > /tmp/tj_ref.txt
+
+RUNG 80 JUMP TABLE: IDENTICAL (33 lines)
+
+-------------------------------------------------------------------
+5. Full rung-48 solve, bit-for-bit: rho.c (1 thread, 1 walk, seed
+   12345, dpbits 6) vs rho_ref48 (1 lane, same seed)
+-------------------------------------------------------------------
+$ ./rho1 fffffffff58f ffffff1b5011 769ec7f35857 b4a02702bdb 210644f01a41 553d08cef988 6 32 1 1 21 12345 2>&1 | tail -2
+steps=25420821 time=133.6s rate=0.19 Mops/s
+FOUND kappa = 0000142b32783630
+
+$ ./rho_ref48 solve 6 21 1 12345 0 2>/dev/null | grep -E 'SOLVED|steps'
+SOLVED kappa=0x0000142b32783630 verified=1
+steps=25420821 time=191.3s rate=0.13 Mops/s dphits=397790 ins=397789
+
+rho.c   : kappa=0000142b32783630 steps=25420821
+rho_ref : kappa=0000142b32783630 steps=25420821
+RUNG 48 FULL SOLVE: IDENTICAL kappa AND step count
+
+-------------------------------------------------------------------
+6. Walk cross-check on rungs 64 and 80 (NW64=2 domain — the same
+   Montgomery domain the CUDA build uses): first distinguished
+   points of lane 0.  rho.c RHODEBUG=1 (1 thread/1 walk, dpbits 12)
+   vs rho_ref smoke with the lane-0 DP tap.
+-------------------------------------------------------------------
+$ RHODEBUG=1 ./rho2 ffffffffffffed79 10000000153aa1c27 7f3ebcb70e7ff266 c8a99d561dd12d1 989c2061ef0e994e 47cad8f3cdc61403 12 32 1 1 22   # runs 25 s, then killed
+rho.c DPs=24  rho_ref DPs=25
+RUNG 64 DP TAP (lane 0, first 24): IDENTICAL
+   DP0: rho.c 23d5d907e653d000  ==  rho_ref 23d5d907e653d000
+   DP1: rho.c 285d30d8e733d000  ==  rho_ref 285d30d8e733d000
+   DP2: rho.c 9972f52b78a87000  ==  rho_ref 9972f52b78a87000
+
+$ RHODEBUG=1 ./rho2 ffffffffffffffffdfbd fffffffffe06e604efc9 d08430a6c00fae05651 51f122611becfa454627 cf45d656507f3699875e 3bffc8e5352fdbabb520 12 32 1 1 22   # runs 25 s, then killed
+rho.c DPs=24  rho_ref DPs=25
+RUNG 80 DP TAP (lane 0, first 24): IDENTICAL
+   DP0: rho.c b7532da59dd30000  ==  rho_ref b7532da59dd30000
+   DP1: rho.c 2f272857b7dd4000  ==  rho_ref 2f272857b7dd4000
+   DP2: rho.c 7e7730a28c890000  ==  rho_ref 7e7730a28c890000
+
+-------------------------------------------------------------------
+7. Selftest: random-kappa DLPs solved end-to-end and checked
+   (target swap, jump-table rebuild, walk, DP table, collision
+    recovery, host verification)
+-------------------------------------------------------------------
+$ ./rho_ref32 selftest 3 2>/dev/null | tail -5
+SELFTEST rung=32: 3 random-kappa DLPs on the same curve
+selftest 0: expected 0x0000000060c2a8bb  got 0x0000000060c2a8bb  -> PASS (steps=59040, 0.0s)
+selftest 1: expected 0x00000000cabdf13a  got 0x00000000cabdf13a  -> PASS (steps=55488, 0.0s)
+selftest 2: expected 0x00000000722cd29d  got 0x00000000722cd29d  -> PASS (steps=77952, 0.1s)
+SELFTEST PASSED
+
+$ ./rho_ref48 selftest 3 2>/dev/null | tail -5
+SELFTEST rung=48: 3 random-kappa DLPs on the same curve
+selftest 0: expected 0x0000ecbcb9a53a84  got 0x0000ecbcb9a53a84  -> PASS (steps=39507360, 62.4s)
+selftest 1: expected 0x0000a0748d47e9a5  got 0x0000a0748d47e9a5  -> PASS (steps=42826656, 59.6s)
+selftest 2: expected 0x000077675922e8ae  got 0x000077675922e8ae  -> PASS (steps=13047776, 17.8s)
+SELFTEST PASSED
+
+end of transcript
