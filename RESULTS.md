@@ -1,6 +1,6 @@
 # Classical solutions to the "Brace for impact" ECDLP ladder (arXiv:2508.14011)
 
-**Status: working notes; superseded by README.md for public consumption.**
+**Status: DRAFT — not published anywhere. Local working notes for the team.**
 
 We solved the low rungs of the secp256k1-shaped ECDLP challenge ladder from
 *"Brace for impact: ECDLP challenges for quantum cryptanalysis"*
@@ -73,7 +73,7 @@ see GPU_PREP.md):
 
 | rung | expected group ops | M4 CPU (measured rate) | 1× RTX 4090 |
 |------|--------------------|------------------------|-------------|
-| 80   | 1.4e12 | ~18 h (**running in background**) | ~1.5 min |
+| 80   | 1.4e12 | **SOLVED 2026-10-24** — 1862 s @ 877 Mops/s, 1 RTX PRO 6000 Blackwell (κ verified ×2; result_80.json) | ~1.5 min |
 | 96   | 3.6e14 | ~6 months | ~6 h |
 | 112  | 8.9e16 | centuries | ~66 days |
 | 128  | 2.2e19 | — | ~1.5e4 years (record territory) |
