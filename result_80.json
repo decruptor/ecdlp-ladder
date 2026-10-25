@@ -7,6 +7,6 @@
   "time_s": 1862.3,
   "steps": 1633513218048,
   "rate_ops_s": 877170000,
-  "hardware": "RTX PRO 6000 Blackwell (vast BC2, sm_120), CUDA 13.0",
+  "hardware": "RTX PRO 6000 Blackwell (rented cloud instance, sm_120), CUDA 13.0",
   "method": "parallel Pollard rho (DP, CUDA, Montgomery 128-bit, warp batch inversion), 1 of 3 independent workers (seed 11); expected 1.37e12 ops, realized 1.19x"
 }
