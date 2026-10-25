@@ -1,6 +1,6 @@
 {
   "bits": 80,
-  "kappa": "73093884833514432404244",
+  "kappa": "188661630238837556368340",
   "hex": "0x27f35e126a10e6e7d3d4",
   "verified": true,
   "verification": "independent pure-Python EC replay vs challenges.json (Tonelli-Shanks decode, P == [kappa]Q exact, [n]Q == O)",
