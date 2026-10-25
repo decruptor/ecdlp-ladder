@@ -1,5 +1,5 @@
 import json, math, time
-data=json.load(open("/Users/mkunak/Devs/ecdlp-ladder/challenges.json"))
+data=json.load(open("challenges.json"))
 def uncompress(hexstr,p):
     prefix=int(hexstr[:2],16); x=int(hexstr[2:],16)
     assert pow(x*x*x+7,(p-1)//2,p)==1, "x not on curve"
@@ -66,4 +66,4 @@ for r in data["rungs"]:
     ok = kappa is not None and mul(kappa,Q,p)==P
     print(f"secp{k}k1: kappa={kappa} (hex {hex(kappa) if kappa is not None else '-'})  verified={ok}  time={dt:.2f}s")
     results[k]={"kappa":str(kappa) if kappa else None,"hex":hex(kappa) if kappa else None,"verified":ok,"time_s":round(dt,3),"method":"BSGS"}
-json.dump(results, open("/Users/mkunak/Devs/ecdlp-ladder/results_small.json","w"), indent=2)
+json.dump(results, open("results_small.json","w"), indent=2)

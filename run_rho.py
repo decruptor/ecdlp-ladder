@@ -1,5 +1,5 @@
 import json, subprocess, sys, time
-data=json.load(open("/Users/mkunak/Devs/ecdlp-ladder/challenges.json"))
+data=json.load(open("challenges.json"))
 def uncompress(hexstr,p):
     prefix=int(hexstr[:2],16); x=int(hexstr[2:],16)
     assert pow(x*x*x+7,(p-1)//2,p)==1

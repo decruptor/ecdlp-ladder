@@ -1,6 +1,8 @@
 # Classical solutions to the "Brace for impact" ECDLP ladder (arXiv:2508.14011)
 
-**Status: DRAFT — not published anywhere. Local working notes for the team.**
+**Status: published.** This file is the canonical results record of the public
+repository [github.com/decruptor/ecdlp-ladder](https://github.com/decruptor/ecdlp-ladder);
+it is updated as new rungs fall, and corrections are noted in place.
 
 We solved the low rungs of the secp256k1-shaped ECDLP challenge ladder from
 *"Brace for impact: ECDLP challenges for quantum cryptanalysis"*
@@ -50,9 +52,21 @@ are consistent with the true order. (Worth reporting upstream.)
 | 32 | `0xc6a8b85f` | BSGS | 1 core | 0.6 s | ✅ |
 | 48 | `0x142b32783630` | parallel Pollard rho (DP) | M4 (10 threads) | 0.2 s (10.1e6 ops, 88 M/s) | ✅ |
 | 64 | `0xfc14e401202418fd` | parallel Pollard rho (DP, 128-bit limbs) | M4 (10 threads) | 395 s (7.5e9 ops, 19 M/s) | ✅ |
+| 80 | `0x27f35e126a10e6e7d3d4` | parallel Pollard rho (DP, CUDA) | 1× RTX PRO 6000 Blackwell (sm_120) | 1862 s (1.63e12 ops, 877 M/s) | ✅ |
 
 Every κ above was verified by an **independent** pure-Python point-arithmetic check
 `[κ]·Q == P` (see `verify_all.py`), not just by the solver that produced it.
+
+**Worker topology (rung 80).** The "1 of 3 independent workers (seed 11)" note in
+`result_80.json` refers to three *sequential* solver attempts on the same card, each
+run with its own walk seed; the seed-11 attempt succeeded. The recorded step count
+(1.63e12), wall time and 877 M ops/s rate are the successful attempt's own — there
+were no concurrent workers and no second GPU.
+
+**Correction (2026-10-25).** The decimal `kappa` field of `result_80.json` had been
+corrupted and disagreed with the artifact's own (correct) `hex` field; it was fixed in
+commit `6787419`. `verify_all.py` now prints PASS on every published result file
+(rungs 6, 8, 12, 16, 24, 32, 48, 64, 80 — ALL VERIFIED).
 
 ## Solver notes
 
