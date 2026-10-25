@@ -1,8 +1,8 @@
-# Classically solving the "Brace for impact" ECDLP ladder (rungs 6–64)
+# Classically solving the "Brace for impact" ECDLP ladder (rungs 6–80)
 
 **Author:** Decruptor (pseudonymous)
 **License:** GPLv3 (see [`LICENSE`](LICENSE))
-**Related:** kangaroo-constants paper repo — [paper-repo-url]
+**Related:** kangaroo walk constants paper — [kangaroo-constants](https://github.com/decruptor/kangaroo-constants)
 
 This repo contains the solvers, the verified challenge data and the results for
 the low rungs of the secp256k1-shaped ECDLP challenge ladder from
@@ -43,7 +43,7 @@ SEA, is **22300745198530623141528449602726112266830289** (also prime). The
 printed P and Q are consistent with the true order. Reported upstream;
 [`challenges.json`](challenges.json) carries the corrected value, flagged.
 
-## Results: rungs 6–64
+## Results: rungs 6–80
 
 Every κ below was verified by an **independent** pure-Python point-arithmetic
 check `[κ]·Q == P` (`verify_all.py`), not just by the solver that produced it.
@@ -58,9 +58,10 @@ check `[κ]·Q == P` (`verify_all.py`), not just by the solver that produced it.
 | 32 | `0xc6a8b85f` | BSGS | 1 core | 0.6 s | ✅ |
 | 48 | `0x142b32783630` | parallel Pollard rho (DP) | M4 (10 threads) | 0.2 s (10.1e6 ops, 88 M/s) | ✅ |
 | 64 | `0xfc14e401202418fd` | parallel Pollard rho (DP, 128-bit limbs) | M4 (10 threads) | 395 s (7.5e9 ops, 19 M/s) | ✅ |
+| 80 | `0x27f35e126a10e6e7d3d4` | parallel Pollard rho (DP, CUDA) | 1× RTX PRO 6000 Blackwell (sm_120) | 1862 s (1.63e12 ops, 877 M/s) | ✅ |
 
-(The published ladder skips some bit-lengths; rungs 6, 8, 12, 16, 24, 32, 48, 64
-are the low cards that exist, per `challenges.json`.)
+(The published ladder skips some bit-lengths; rungs 6, 8, 12, 16, 24, 32, 48,
+64, 80 are the cards solved so far, per `challenges.json`.)
 
 ## Solver notes
 
@@ -90,7 +91,7 @@ RCKangaroo-class throughput (~14.5 G jump/s per RTX 4090; see GPU80.md's
 
 | rung | expected group ops | M4 CPU (measured rate) | 1× RTX 4090-class |
 |------|--------------------|------------------------|-------------------|
-| 80   | 1.4e12 | ~18 h (a CPU run was started in the background) | 12–47 min |
+| 80   | 1.4e12 | **SOLVED 2026-10-24** — 1862 s @ 877 Mops/s, 1× RTX PRO 6000 Blackwell (κ verified ×2; `result_80.json`) | ~12–47 min (rho-kernel estimate; see GPU80.md) |
 | 96   | 3.6e14 | ~6 months | ~6 h |
 | 112  | 8.9e16 | centuries | ~66 days |
 | 128  | 2.2e19 | — | ~1.5e4 years (record territory) |
@@ -106,12 +107,17 @@ Notes:
   domain R = 2^128 matching `rho.c -DNW=2`); rungs 96/112/144 need a new rung
   block in the rung table (NW64 rule: smallest NW64 with 64·NW64 ≥ bitlen(p)+2 —
   rungs up to 96: NW64 = 2; 112/128: NW64 = 3; 144: NW64 = 3).
-* **Not yet verified on real hardware:** actual CUDA execution (kernel launch,
-  shuffles, atomics, DP table traffic). First steps on a GPU box: build RUNG=48,
-  run `./rho48 selftest 3` (seconds), then `./rho80 smoke`, then the real solve;
-  compare `smoke`'s lane-0 DP tap against `rho_ref80`'s to confirm the GPU walk
-  matches the CPU walk bit-for-bit. See GPU80.md for the full validation
-  transcript and the checklist of what the local (no-GPU) validation covered.
+* **Verified on real hardware.** CUDA execution (kernel launch, shuffles,
+  atomics, DP table traffic) is no longer hypothetical: the rung-80 solve ran
+  on a real GPU (RTX PRO 6000 Blackwell, sm_120, CUDA 13.0) and was doubly
+  verified — the kernel's own `[κ]Q == P` check plus an independent
+  pure-Python EC replay (`verify_all.py`, all rungs PASS). See
+  [`result_80.json`](result_80.json) and [`GPU80.md`](GPU80.md) for the
+  validation record, and [`test_transcript.txt`](test_transcript.txt) for the
+  local (no-GPU) validation transcript. To reproduce on your own card: build
+  RUNG=48, run `./rho48 selftest 3` (seconds), then `./rho80 smoke`, then the
+  real solve; compare `smoke`'s lane-0 DP tap against `rho_ref80`'s to confirm
+  the GPU walk matches the CPU walk bit-for-bit.
 
 ## Reproducibility
 

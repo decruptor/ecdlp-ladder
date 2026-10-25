@@ -1,6 +1,6 @@
 import json, hashlib, sys
 sys.setrecursionlimit(10000)
-data = json.load(open("/Users/mkunak/Devs/ecdlp-ladder/challenges.json"))
+data = json.load(open("challenges.json"))
 
 def is_probable_prime(n, k=20):
     if n < 2: return False
