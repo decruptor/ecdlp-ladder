@@ -8,5 +8,5 @@
   "steps": 47242801935104,
   "rate_ops_s": 3557410000,
   "hardware": "RTX 4090 (rented cloud instance, sm_89), CUDA 13.0",
-  "method": "parallel Pollard rho v6 (DP, CUDA, Montgomery 128-bit, endomorphism x2.2, warp batch inversion), 1 of 12 independent workers (seed 3504); expected 3.2e14 ops, realized 1.48x"
+  "method": "parallel Pollard rho v6 (DP, CUDA, Montgomery 128-bit, endomorphism x2.2, warp batch inversion), 1 of 12 independent workers (seed 3504); expected 3.518e14 ops, realized 0.13x"
 }
