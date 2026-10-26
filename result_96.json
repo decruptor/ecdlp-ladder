@@ -1,0 +1,12 @@
+{
+  "bits": 96,
+  "kappa": "66861209600743839473809503331",
+  "hex": "0xd80a4bdb34ee0494d6543463",
+  "verified": true,
+  "verification": "doubly verified: solver in-process CUDA verify_kappa (verified=1) + independent pure-Python EC replay vs challenges.json card 96 on two machines (double-and-add and Montgomery-ladder scalar mult, compressed-point decode, P == [kappa]Q exact, [n]Q == O, kappa < n); kappa identical character-for-character across all channels",
+  "time_s": 13280.1,
+  "steps": 47242801935104,
+  "rate_ops_s": 3557410000,
+  "hardware": "RTX 4090 (rented cloud instance, sm_89), CUDA 13.0",
+  "method": "parallel Pollard rho v6 (DP, CUDA, Montgomery 128-bit, endomorphism x2.2, warp batch inversion), 1 of 12 independent workers (seed 3504); expected 3.2e14 ops, realized 1.48x"
+}
