@@ -7,6 +7,8 @@
   "time_s": 1862.3,
   "steps": 1633513218048,
   "rate_ops_s": 877170000,
-  "hardware": "RTX PRO 6000 Blackwell (rented cloud instance, sm_120), CUDA 13.0",
-  "method": "parallel Pollard rho (DP, CUDA, Montgomery 128-bit, warp batch inversion), 1 of 3 independent workers (seed 11); expected 1.37e12 ops, realized 1.19x"
+  "hardware": "3x RTX PRO 6000 Blackwell (rented cloud instance, sm_120), one independent worker per card, full launch grid 1504 x 256 = 385,024 walks; CUDA 13.0",
+  "method": "parallel Pollard rho (DP d=22, CUDA, Montgomery 128-bit, warp batch inversion), winner = 1 of 3 independent workers (seed 11); realized 1.07x the best-of-3 expectation with detection lag (1.53e12, merge-race model, paper section 7); bare single-worker reading 1.19x of 1.37e12",
+  "source": "rho80_fixed.cu (md5 ce2a2138ff8df16866bff16424a68e51)",
+  "solved_utc": "2026-10-24T15:16Z"
 }

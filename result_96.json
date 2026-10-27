@@ -7,6 +7,17 @@
   "time_s": 13280.1,
   "steps": 47242801935104,
   "rate_ops_s": 3557410000,
-  "hardware": "RTX 4090 (rented cloud instance, sm_89), CUDA 13.0",
-  "method": "parallel Pollard rho v6 (DP, CUDA, Montgomery 128-bit, endomorphism x2.2, warp batch inversion), 1 of 12 independent workers (seed 3504); expected 3.518e14 ops, realized 0.13x"
+  "hardware": "fleet of 12 independent workers on 3 rented cloud instances: 8x RTX 4090 (sm_89), 3x RTX PRO 6000 Blackwell (sm_120), 1x A100 80GB (sm_80), all on the v6 endomorphism build, CUDA 13.0; winner = RTX 4090 (seed 3504, 131,072 walks)",
+  "method": "parallel Pollard rho v6 (DP d=26, CUDA, Montgomery 128-bit, GLV endomorphism: 1.68x fewer walk steps at 1.34x per-step cost, warp batch inversion), winner = 1 of 12 independent workers (seed 3504); realized 0.13x the single-worker plain-walk expectation 3.518e14 = 0.23x endo-adjusted = 0.78x the expected best-of-12 draw (0.69x with detection lag)",
+  "rate_unit": "raw endomorphism walk steps per second (plain-walk equivalent = x1.68)",
+  "solved_utc": "2026-10-26T15:33:06Z",
+  "source": "rho80v6b.cu (md5 a781158e97430169ff790f4b937a317b) for the RTX 4090 workers incl. the winner; rho80v6sw.cu (md5 a5d8b82ee47943728c337babe0909a42, launch-shape flags per README) for the PRO 6000 and A100 workers",
+  "fleet": {
+    "first_launch_utc": "2026-10-26T11:41:38Z",
+    "first_launch_to_solve_h": 3.86,
+    "card_hours_to_solve": 41.2,
+    "steps_to_solve": 554000000000000.0,
+    "halted_utc": "2026-10-26T16:31Z",
+    "card_hours_to_halt": 52
+  }
 }
